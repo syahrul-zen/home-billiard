@@ -17,6 +17,9 @@ class User extends Authenticatable
      *
      * @var array<int, string>
      */
+
+    protected $table = 'admin'; // Ensure the model uses the correct table
+
     protected $fillable = [
         'name',
         'email',
