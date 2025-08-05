@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="id">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -66,7 +67,7 @@
             -webkit-backdrop-filter: blur(10px);
             border-radius: 15px;
             padding: 30px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
             border: 1px solid var(--border-light);
         }
 
@@ -272,6 +273,7 @@
                 opacity: 0;
                 transform: translateY(-10px);
             }
+
             to {
                 opacity: 1;
                 transform: translateY(0);
@@ -375,38 +377,92 @@
             animation: slideIn 0.3s ease;
         }
 
-        /* Modal Styles */
+
+        /* Modal Styles - PERBAIKAN MODAL */
         .modal-content {
-            background-color: var(--card-light);
+            background-color: #ffffff !important;
+            /* Background solid putih */
             color: var(--text-dark);
-            border: 1px solid var(--border-light);
-            backdrop-filter: blur(10px);
+            border: 1px solid #dee2e6;
+            /* Border Bootstrap default */
+            box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+            /* Shadow Bootstrap default */
+            /* Hapus backdrop-filter */
+        }
+
+        .modal-header {
+            background-color: #ffffff;
+            border-bottom: 1px solid #dee2e6;
+        }
+
+        .modal-footer {
+            background-color: #ffffff;
+            border-top: 1px solid #dee2e6;
+        }
+
+        .modal-body {
+            background-color: #ffffff;
         }
 
         .modal-header h5 {
             color: var(--primary-dark);
+            margin: 0;
         }
 
         .modal-body h6 {
             color: var(--primary-dark);
+            font-weight: 600;
         }
 
-        .modal-footer {
-            border-top: 1px solid var(--border-light);
+        .modal-body p {
+            color: var(--text-dark);
+            margin-bottom: 0.5rem;
+        }
+
+        .modal-body ul {
+            color: var(--text-dark);
+            padding-left: 1.2rem;
+        }
+
+        .modal-body ul li {
+            margin-bottom: 0.3rem;
+        }
+
+        .text-muted {
+            color: #6c757d !important;
+        }
+
+        .btn-close {
+            filter: none;
+            /* Hapus filter invert */
+            background-color: transparent;
+            border: 0;
+            opacity: 0.5;
+        }
+
+        .btn-close:hover {
+            opacity: 0.75;
         }
 
         .btn-secondary {
-            background-color: var(--border-light);
-            color: var(--text-dark);
+            background-color: #6c757d;
+            color: #ffffff;
+            border: none;
         }
 
         .btn-secondary:hover {
-            background-color: var(--primary-dark);
-            color: var(--primary-white);
+            background-color: #5a6268;
+            color: #ffffff;
         }
 
+        /* Modal backdrop */
+        .modal-backdrop {
+            background-color: rgba(0, 0, 0, 0.5);
+            /* Background gelap untuk backdrop */
+        }
     </style>
 </head>
+
 <body>
     <div class="booking-container">
         <!-- Header -->
@@ -461,19 +517,20 @@
     <!-- Modal for Details -->
     <div class="modal fade" id="detailsModal" tabindex="-1">
         <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content" style="background-color: var(--card-dark); color: white; border: 1px solid var(--border-dark); backdrop-filter: blur(10px);">
+            <div class="modal-content"
+                style="background-color: var(--card-dark); color: white; border: 1px solid var(--border-dark); backdrop-filter: blur(10px);">
                 <div class="modal-header border-bottom border-secondary">
-                    <h5 class="modal-title"><i class="bi bi-info-circle me-2" style="color: var(--primary-green);"></i>Detail Booking</h5>
+                    <h5 class="modal-title"><i class="bi bi-info-circle me-2"></i>Detail Booking</h5>
                     <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
                 </div>
                 <div class="modal-body">
                     <div class="mb-3">
-                        <h6 style="color: var(--primary-green);">Lokasi</h6>
+                        <h6>Lokasi</h6>
                         <p class="mb-0">Billiard Pro - VIP Floor 2</p>
                         <p class="text-muted">Jl. Billiard No. 123, Tangerang, Banten</p>
                     </div>
                     <div class="mb-3">
-                        <h6 style="color: var(--primary-green);">Fasilitas</h6>
+                        <h6>Fasilitas</h6>
                         <ul class="mb-0">
                             <li>Meja Billiard Premium 9 feet</li>
                             <li>Ruangan Smoking</li>
@@ -483,7 +540,7 @@
                         </ul>
                     </div>
                     <div class="mb-3">
-                        <h6 style="color: var(--primary-green);">Ketentuan</h6>
+                        <h6>Ketentuan</h6>
                         <ul class="mb-0">
                             <li>Minimal booking 1 jam</li>
                             <li>Maksimal booking 4 jam</li>
@@ -502,20 +559,63 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script>
         // Generate time slots
-        const timeSlots = [
-            { time: '13:00 - 14:00', duration: '60 menit', price: 'Rp. 80.000' },
-            { time: '14:00 - 15:00', duration: '60 menit', price: 'Rp. 80.000' },
-            { time: '15:00 - 16:00', duration: '60 menit', price: 'Rp. 80.000' },
-            { time: '16:00 - 17:00', duration: '60 menit', price: 'Rp. 80.000' },
-            { time: '17:00 - 18:00', duration: '60 menit', price: 'Rp. 80.000' },
-            { time: '18:00 - 19:00', duration: '60 menit', price: 'Rp. 80.000' },
-            { time: '19:00 - 20:00', duration: '60 menit', price: 'Rp. 80.000' },
-            { time: '20:00 - 21:00', duration: '60 menit', price: 'Rp. 80.000' },
-            { time: '21:00 - 22:00', duration: '60 menit', price: 'Rp. 80.000' },
-            { time: '22:00 - 23:00', duration: '60 menit', price: 'Rp. 80.000' },
-            { time: '23:00 - 00:00', duration: '60 menit', price: 'Rp. 80.000' }
+        const timeSlots = [{
+                time: '13:00 - 14:00',
+                duration: '60 menit',
+                price: 'Rp. 80.000'
+            },
+            {
+                time: '14:00 - 15:00',
+                duration: '60 menit',
+                price: 'Rp. 80.000'
+            },
+            {
+                time: '15:00 - 16:00',
+                duration: '60 menit',
+                price: 'Rp. 80.000'
+            },
+            {
+                time: '16:00 - 17:00',
+                duration: '60 menit',
+                price: 'Rp. 80.000'
+            },
+            {
+                time: '17:00 - 18:00',
+                duration: '60 menit',
+                price: 'Rp. 80.000'
+            },
+            {
+                time: '18:00 - 19:00',
+                duration: '60 menit',
+                price: 'Rp. 80.000'
+            },
+            {
+                time: '19:00 - 20:00',
+                duration: '60 menit',
+                price: 'Rp. 80.000'
+            },
+            {
+                time: '20:00 - 21:00',
+                duration: '60 menit',
+                price: 'Rp. 80.000'
+            },
+            {
+                time: '21:00 - 22:00',
+                duration: '60 menit',
+                price: 'Rp. 80.000'
+            },
+            {
+                time: '22:00 - 23:00',
+                duration: '60 menit',
+                price: 'Rp. 80.000'
+            },
+            {
+                time: '23:00 - 00:00',
+                duration: '60 menit',
+                price: 'Rp. 80.000'
+            }
         ];
-        
+
 
         let selectedSlot = null;
 
@@ -531,7 +631,7 @@
                     <div class="duration">${slot.duration}</div>
                     <div class="price">${slot.price}</div>
                 `;
-                
+
                 slotElement.addEventListener('click', () => selectSlot(index));
                 container.appendChild(slotElement);
             });
@@ -575,7 +675,7 @@
             // Simulate API call
             setTimeout(() => {
                 document.getElementById('loading').classList.remove('show');
-                
+
                 // Show success message
                 const successMessage = document.createElement('div');
                 successMessage.className = 'alert-success-custom';
@@ -584,9 +684,10 @@
                     <strong>Booking Berhasil!</strong> Meja VIP Floor 2 untuk jam ${selectedSlot.time} telah berhasil dipesan.
                     <button type="button" class="btn-close float-end" onclick="this.parentElement.remove()"></button>
                 `;
-                
-                document.querySelector('.booking-card').insertBefore(successMessage, document.querySelector('.booking-actions'));
-                
+
+                document.querySelector('.booking-card').insertBefore(successMessage, document.querySelector(
+                    '.booking-actions'));
+
                 // Reset selection
                 document.querySelectorAll('.time-slot').forEach(slot => {
                     slot.classList.remove('selected');
@@ -608,4 +709,5 @@
         generateTimeSlots();
     </script>
 </body>
+
 </html>

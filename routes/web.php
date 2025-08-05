@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\AuthController;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -27,4 +29,9 @@ Route::get('/dashboard', function () {
 
 Route::get('booking-table2', function () {
     return view('Member.bTable2');
+});
+
+Route::controller(AuthController::class)->group(function() {
+    Route::get('/register', 'register');
+    Route::post('/register', 'createMember');
 });
