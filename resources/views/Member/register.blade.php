@@ -28,7 +28,7 @@
 
         /* Registration Container */
         .registration-container {
-            max-width: 800px;
+            max-width: 600px;
             margin: 0 auto;
             padding: 0 20px;
         }
@@ -225,6 +225,32 @@
             margin-right: 10px;
         }
 
+        /* Register Link */
+        .register-section {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid var(--border-light);
+        }
+
+        .register-text {
+            font-size: 0.9rem;
+            color: var(--text-dark);
+            margin: 0;
+        }
+
+        .register-link {
+            color: var(--accent-red);
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .register-link:hover {
+            color: var(--primary-dark);
+            text-decoration: underline;
+        }
+
+
         @keyframes spin {
             to {
                 transform: rotate(360deg);
@@ -351,9 +377,14 @@
                 </button>
 
                 <br>
-                <br>
 
-                <a href="{{ url('/login') }}" class="btn btn-primary w-100">Login</a>
+                <!-- Register Link -->
+                <div class="register-section">
+                    <p class="register-text">
+                        Sudah punya akun?
+                        <a href="{{ url('login') }}" class="register-link">Login sekarang</a>
+                    </p>
+                </div>
 
             </form>
         </div>

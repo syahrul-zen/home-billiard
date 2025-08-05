@@ -32,6 +32,8 @@ Route::get('booking-table2', function () {
 });
 
 Route::controller(AuthController::class)->group(function() {
+    Route::get('/login', 'login');
     Route::get('/register', 'register');
     Route::post('/register', 'createMember');
+    Route::post('/login', 'authenticate');
 });
