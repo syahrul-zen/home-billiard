@@ -286,8 +286,8 @@
                 <!-- Nama Lengkap -->
                 <div class="form-group">
                     <label for="nama" class="form-label">Nama Lengkap <span class="text-danger">*</span></label>
-                    <input type="text" class="form-control" name="nama_lengkap" id="nama_lengkap"
-                        placeholder="Masukkan nama lengkap Anda" required>
+                    <input type="text" class="form-control" name="nama_lengkap" id="nama_lengkap" value="{{ @old('nama_lengkap') }}"
+                        placeholder="Masukkan nama lengkap Anda">
                     @error('nama_lengkap')
                         <div class="text-danger">
                             {{ $message }}
@@ -299,7 +299,7 @@
                 <div class="form-group">
                     <label for="alamat" class="form-label">Alamat <span class="text-danger">*</span></label>
                     <textarea class="form-control" id="alamat" name="alamat" rows="3" placeholder="Masukkan alamat lengkap Anda"
-                        required></textarea>
+                        required>{{ @old('alamat') }}</textarea>
                     @error('alamat')
                         <div class="text-danger">
                             {{ $message }}
@@ -311,10 +311,10 @@
                     <label for="status" class="form-label">Status Member <span class="text-danger">*</span></label>
                     <select class="form-select" name="status" required>
                         <option value="" selected disabled>Pilih Status Member</option>
-                        <option value="pelajar(siswa)">Pelajar (Siswa)</option>
-                        <option value="mahasiswa">Mahasiswa</option>
-                        <option value="bekerja">Bekerja</option>
-                        <option value="dll">Dll</option>
+                        <option value="pelajar(siswa)" @selected(@old('status') === 'pelajar(siswa)')>Pelajar (Siswa)</option>
+                        <option value="mahasiswa" @selected(@old('status') === 'mahasiswa')>Mahasiswa</option>
+                        <option value="bekerja" @selected(@old('status') === 'bekerja')>Bekerja</option>
+                        <option value="dll" @selected(@old('status') === 'dll')>Dll</option>
                     </select>
                     <div class="invalid-feedback">Silakan pilih status member</div>
                 </div>
@@ -323,7 +323,7 @@
                 <!-- No WhatsApp -->
                 <div class="form-group">
                     <label for="noWa" class="form-label">No. WhatsApp <span class="text-danger">*</span></label>
-                    <input type="tel" class="form-control" name="no_wa" id="noWa"
+                    <input type="tel" class="form-control" value="{{ @old('no_wa') }}" name="no_wa" id="noWa"
                         placeholder="Contoh: 081234567890" required>
                     @error('no_wa')
                         <div class="text-danger">
@@ -335,7 +335,7 @@
                 <!-- Email -->
                 <div class="form-group">
                     <label for="email" class="form-label">Email <span class="text-danger">*</span></label>
-                    <input type="email" class="form-control" name="email" id="email"
+                    <input type="email" class="form-control" name="email" id="email" value="{{ old('email') }}"
                         placeholder="nama@email.com" required>
                     @error('email')
                         <div class="text-danger">

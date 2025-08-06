@@ -57,7 +57,7 @@ class AuthController extends Controller
         }
 
         if (Auth::guard('member')->attempt($credentials)) {
-            return "Berhasil login menjadi member";
+            return redirect('/')->with('success', 'Berhasil login sebagai member');
         }
 
         return back()->with('loginError', 'Login Failed');

@@ -278,7 +278,7 @@
                 <!-- Email -->
                 <div class="mb-3">
                     <label for="email" class="form-label">Email <span class="text-danger">*</span></label>
-                    <input type="email" class="form-control" id="email" name="email"
+                    <input type="email" class="form-control" id="email" name="email" 
                         placeholder="nama@email.com" required>
                 </div>
 
