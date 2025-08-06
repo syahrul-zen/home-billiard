@@ -31,7 +31,29 @@ class Table1Controller extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validated = $request->validate([
+            'member_id' => 'required', 
+            'waktu_mulai' => 'required', 
+            'waktu_akhir' => 'required', 
+            'keterangan' => 'max:240', 
+            'harga' => 'required', 
+            'bukti_pembayaran' => 'required|max:2000'
+        ]);
+
+        $file = $request->file('bukti_pembayaran');
+
+        $rename = uniqid() . '_' . $file->getClientOriginalName();
+
+        $validated['bukti_pembayaran'] = $rename;
+
+        Table1::create($validated);
+
+        $locationFile = 'file';
+
+        $file->move($locationFile, $rename);
+
+        return "berhasil melakukan booking";
+
     }
 
     /**
@@ -107,12 +129,12 @@ class Table1Controller extends Controller
             return redirect()->back()->with('error', 'Meja sudah dipesan pada waktu tersebut.');
         }
 
-        $satuJamKedepan = date('Y-m-d H:i:s', strtotime($mergeTime . ' +1 hour'));
+        $satuJamKedepan = date('Y-m-d H:i   ', strtotime($mergeTime . ' +1 hour'));
 
         return view('Member.pembayaran1', [
             'tanggal' => $tanggal,
-            'jam' => $jam,
-            'satuJamKedepan' => $satuJamKedepan,
+            'waktuAwal' => $mergeTime,
+            'waktuAkhir' => $satuJamKedepan,
             'user' => $user
         ]);
 

@@ -470,32 +470,32 @@
             <div class="time-slots">
 
                 @foreach ($jamMain as $item)
-
                     @php
-                        $data = $dataTanggalSekarang->where('waktu_mulai', '=', $tanggalSekarang->format('Y-m-d') . ' ' . $item);
+                        $data = $dataTanggalSekarang->where(
+                            'waktu_mulai',
+                            '=',
+                            $tanggalSekarang->format('Y-m-d') . ' ' . $item,
+                        );
 
-                        
-                    $satuJam = date('H:i', strtotime('+1 hour', strtotime($item)));
+                        $satuJam = date('H:i', strtotime('+1 hour', strtotime($item)));
 
                     @endphp
 
 
                     @if ($data->isEmpty())
-                        <div class="time-slot" onclick="toggleSelection(this)" data-tanggal="{{ date('d-M-Y') }}" data-jam="{{ date('H:i', strtotime($item)) }}">
+                        <div class="time-slot" onclick="toggleSelection(this)" data-tanggal="{{ date('d-M-Y') }}"
+                            data-jam="{{ date('H:i:s', strtotime($item)) }}">
                             <div class="time">{{ date('H:i', strtotime($item)) }} - {{ $satuJam }}</div>
                             <div class="duration">60 menit</div>
                             <div class="price">Rp. 80.000</div>
                         </div>
                     @else
-                        <div class="time-slot booked" onclick="toggleSelection(this)" data-tanggal="{{ date('Y-m-d') }}" data-jam="10:00">
+                        <div class="time-slot booked" data-jam="10:00">
                             <div class="time">13:00 - 14:00</div>
                             <div class="duration">60 menit</div>
                             <div class="price">Rp. 80.000</div>
                         </div>
-                        
                     @endif
-
-
                 @endforeach
 
 
@@ -555,7 +555,7 @@
                     <div class="price">Rp. 80.000</div>
                 </div>
             </div> --}}
-        </div>
+            </div>
 
 
             <!-- Action Buttons -->
@@ -615,7 +615,6 @@
     <script src="{{ asset('FE/js/sweetalert.min.js') }}"></script>
 
     <script>
-
         function showDetails() {
             const modal = new bootstrap.Modal(document.getElementById('detailsModal'));
             modal.show();
@@ -626,7 +625,7 @@
             const tanggal = element.getAttribute('data-tanggal');
             const jam = element.getAttribute('data-jam');
 
-                swal({
+            swal({
                     title: "Konfirmasi!",
                     text: `Anda akan memesan meja untuk tanggal ${tanggal} dan jam mulai ${jam} hingga 1 jam kedepan!`,
                     icon: "info",

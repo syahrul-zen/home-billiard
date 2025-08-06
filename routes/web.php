@@ -40,9 +40,10 @@ Route::controller(AuthController::class)->group(function() {
 });
 
 Route::controller(Table1Controller::class)->group(function() {
-
     Route::get('/booking-table1', 'showJadwal')->middleware('isMember');
     Route::get('/pembayaran-table1/{tanggal}/{jam}', 'showPembayaran');
+
+    Route::post('/booking-table1', 'store')->middleware('isMember');
 });
 
 Route::get('/test1', function() {

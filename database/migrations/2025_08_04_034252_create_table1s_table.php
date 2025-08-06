@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->dateTime('waktu_mulai')->unique();
             $table->dateTime('waktu_akhir')->unique();
-            $table->string('kode_booking')->nullable();
+            // $table->string('kode_booking')->nullable();
             $table->integer('harga');
             $table->string('bukti_pembayaran');
             $table->string('keterangan')->nullable();
