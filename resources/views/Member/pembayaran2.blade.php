@@ -1,6 +1,3 @@
-@extends('Member.Layouts.main')
-
-@section('container')
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -39,6 +36,12 @@
   </style>
 </head>
 <body>
+  <nav class="navbar navbar-expand-lg navbar-light bg-white navbar-custom px-4">
+    <a class="navbar-brand" href="#">Validasi Item</a>
+    <div class="ms-auto">
+      <a class="nav-link" href="#">Payment</a>
+    </div>
+  </nav>
 
   <div class="container py-4">
     <div class="row g-4">
@@ -84,22 +87,21 @@
 
     <div class="section-card">
       <div class="mb-2">
-        <h5 class="fw-bold mb-0">Meja 1</h5>
-        {{-- <p class="text-success fw-bold mb-1">Futsal Ball</p> --}}
-        <br>
+        <h5 class="fw-bold mb-0">Football Field</h5>
+        <p class="text-success fw-bold mb-1">Futsal Ball</p>
         <p class="text-success mb-3">Wed, 06 Aug 2025 • 09:00 - 10:00</p>
       </div>
-      {{-- <div class="mb-2">
+      <div class="mb-2">
         <strong>Harga Lapangan :</strong>
         <span class="text-danger float-end text-decoration-line-through">Rp 130.000</span>
-      </div> --}}
-      {{-- <div class="mb-2">
+      </div>
+      <div class="mb-2">
         <strong>Harga Lapangan untuk siswa :</strong>
         <span class="text-success float-end">Rp. 50.000</span>
-      </div> --}}
+      </div>
       <hr>
       <div class="mb-0">
-        <strong class="text-warning ms-2">Bayar Penuh</strong>
+        <strong class="text-danger">Total Bayar</strong> <span class="text-warning ms-2">Bayar Penuh</span>
         <span class="text-success float-end fw-bold">Rp 50.000</span>
       </div>
     </div>
@@ -108,6 +110,3 @@
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
-
-    
-@endsection

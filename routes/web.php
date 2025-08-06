@@ -40,6 +40,15 @@ Route::controller(AuthController::class)->group(function() {
 });
 
 Route::controller(Table1Controller::class)->group(function() {
-    Route::get('/booking-table1', 'showJadwal');
+
+    Route::get('/booking-table1', 'showJadwal')->middleware('isMember');
     Route::get('/pembayaran-table1/{tanggal}/{jam}', 'showPembayaran');
+});
+
+Route::get('/test1', function() {
+    return Auth::guard('member')->user();
+});
+
+Route::get('/test2', function() {
+    return Auth::guard('admin')->user();
 });

@@ -67,6 +67,15 @@ class Table1Controller extends Controller
     }
 
     public function showJadwal() {
+
+        //  if(!Auth::guard('member')->check() && !Auth::guard('admin')->check()) {
+        //     return redirect('/login')->with('error', 'You must be logged in to access this page.');
+        // }
+
+        // if (!Auth::guard('member')->check()) {
+        //     return redirect('/login')->with('error', 'You must be logged in as a member to access this page.');
+        // }
+
         $user = Auth::guard('member')->user();
 
         $tanggalSekarang = new \DateTime('NOW', new \DateTimeZone('Asia/Jakarta'));
@@ -87,6 +96,7 @@ class Table1Controller extends Controller
     }
 
     public function showPembayaran($tanggal, $jam) {
+        
         $user = Auth::guard('member')->user();
 
         $mergeTime = date('Y-m-d', strtotime($tanggal)) . ' ' . $jam;
