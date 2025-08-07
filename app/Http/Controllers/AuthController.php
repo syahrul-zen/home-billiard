@@ -53,7 +53,7 @@ class AuthController extends Controller
         ]);
 
         if (Auth::guard('admin')->attempt($credentials)) {
-            return "Berhasil login menjadi admin";
+            return redirect('/dashboard')->with('success', 'Berhasil login sebagai admin');
         }
 
         if (Auth::guard('member')->attempt($credentials)) {
@@ -61,5 +61,16 @@ class AuthController extends Controller
         }
 
         return back()->with('loginError', 'Login Failed');
+    }
+
+    public function logout() {
+        if (Auth::guard('admin')->check()) {
+            Auth::guard('admin')->logout();
+        } else {
+            Auth::guard('member')->logout();
+        }
+
+        // lalu redirect ke login : 
+        return redirect('login');
     }
 }

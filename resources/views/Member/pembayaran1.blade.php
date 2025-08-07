@@ -97,7 +97,7 @@
                     <h5 class="fw-bold mb-0">Meja 1</h5>
                     {{-- <p class="text-success fw-bold mb-1">Futsal Ball</p> --}}
                     <br>
-                    <p class="text-success mb-3 fw-bold">Wed, 06 Aug 2025 • 09:00 - 10:00</p>
+                    <p class="text-success mb-3 fw-bold">Wed, 06 Aug 2025 • {{ date('H:i', strtotime($waktuAwal)) }} - {{ date('H:i', strtotime($waktuAkhir)) }}</p>
                 </div>
                 <hr>
                 <div class="mb-0">

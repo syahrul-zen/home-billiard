@@ -17,16 +17,15 @@
                 <li class="nav-item"><a class="nav-link" href="{{ url('/#gallery') }}">Galeri</a></li>
                 <li class="nav-item"><a class="nav-link" href="#testimonials">Testimoni</a></li>
                 @if (Auth::guard('member')->check())
-
-                <form action="{{ url('logout') }}" method="post">
-                    @csrf
-                    <li class="nav-item"><button type="submit" class="nav-link btn btn-danger-custom btn-sm ms-3">Logout</button></li>
-                </form>
+                    <li class="nav-item"><a class="nav-link" href="{{ url('profile') }}">Profile</a></li>
+                    <form action="{{ url('logout') }}" method="post">
+                        @csrf
+                        <li class="nav-item"><button type="submit" class="nav-link btn btn-danger-custom btn-sm ms-3">Logout</button></li>
+                    </form>
                 @else
                     <li class="nav-item"><a class="nav-link btn btn-primary-custom btn-sm ms-3"
                         href="{{ url('login') }}">Login</a>
                     </li>
-
                 @endif
             </ul>
         </div>

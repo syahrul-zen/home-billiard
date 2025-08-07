@@ -78,7 +78,7 @@
                         <div class="p-4">
                             <h4>Meja Premium</h4>
                             <p>Meja billiard ukuran 8 feet dengan permukaan mahoni untuk pemain intermediate</p>
-                            <span class="price-tag">Rp 75.000/jam</span>
+                            <a href="{{ url('booking-table2') }}"><span class="price-tag">Rp 50.000/jam</span></a>
                         </div>
                     </div>
                 </div>

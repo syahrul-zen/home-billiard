@@ -52,7 +52,7 @@ class Table1Controller extends Controller
 
         $file->move($locationFile, $rename);
 
-        return "berhasil melakukan booking";
+        return redirect('/booking-table1')->with('success', 'Booking berhasil dilakukan. silahkan tunggu konfirmasi dari admin.');
 
     }
 
@@ -89,14 +89,6 @@ class Table1Controller extends Controller
     }
 
     public function showJadwal() {
-
-        //  if(!Auth::guard('member')->check() && !Auth::guard('admin')->check()) {
-        //     return redirect('/login')->with('error', 'You must be logged in to access this page.');
-        // }
-
-        // if (!Auth::guard('member')->check()) {
-        //     return redirect('/login')->with('error', 'You must be logged in as a member to access this page.');
-        // }
 
         $user = Auth::guard('member')->user();
 
@@ -137,23 +129,5 @@ class Table1Controller extends Controller
             'waktuAkhir' => $satuJamKedepan,
             'user' => $user
         ]);
-
-        // return $user;
-
-
-
-        // $data = Table1::where('waktu_mulai', '=', $tanggal . ' ' . $jam)
-        //     ->where('akun_id', '=', $user->id)
-        //     ->first();
-
-        // if (!$data) {
-        //     return redirect()->back()->with('error', 'Data tidak ditemukan.');
-        // }
-
-        // return view('Member.pembayaran', [
-        //     'data' => $data,
-        //     'tanggal' => $tanggal,
-        //     'jam' => $jam
-        // ]);
     }
 }

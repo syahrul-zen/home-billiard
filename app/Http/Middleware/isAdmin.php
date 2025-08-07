@@ -6,10 +6,7 @@ use Closure;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 
-use illuminate\Support\Facades\Auth;
-
-
-class isMember
+class isAdmin
 {
     /**
      * Handle an incoming request.
@@ -18,15 +15,6 @@ class isMember
      */
     public function handle(Request $request, Closure $next): Response
     {
-
-        if(!Auth::guard('member')->check() && !Auth::guard('admin')->check()) {
-            return redirect('/login')->with('error', 'You must be logged in to access this page.');
-        }
-
-        if (!Auth::guard('member')->check()) {
-            return redirect('/dashoard');
-        }
-
         return $next($request);
     }
 }

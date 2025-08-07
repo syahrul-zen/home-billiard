@@ -2,6 +2,9 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\Table1Controller;
+use App\Http\Controllers\Table2Controller;
+use App\Http\Controllers\MemberController;
+
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -25,7 +28,7 @@ Route::get('booking-table1', function ()    {
 });
 
 Route::get('/dashboard', function () {
-    return view('Admin.Layouts.main');
+    return view('Admin.dashboard');
 });
 
 // Route::get('booking-table2', function () {
@@ -37,6 +40,7 @@ Route::controller(AuthController::class)->group(function() {
     Route::get('/register', 'register');
     Route::post('/register', 'createMember');
     Route::post('/login', 'authenticate');
+    Route::post('/logout', 'logout');
 });
 
 Route::controller(Table1Controller::class)->group(function() {
@@ -46,10 +50,22 @@ Route::controller(Table1Controller::class)->group(function() {
     Route::post('/booking-table1', 'store')->middleware('isMember');
 });
 
+Route::controller(Table2Controller::class)->group(function() {
+    Route::get('/booking-table2', 'showJadwal')->middleware('isMember');
+    Route::get('/pembayaran-table2/{tanggal}/{jam}', 'showPembayaran');
+
+    Route::post('/booking-table2', 'store')->middleware('isMember');
+});
+
 Route::get('/test1', function() {
     return Auth::guard('member')->user();
 });
 
 Route::get('/test2', function() {
     return Auth::guard('admin')->user();
+});
+
+Route::controller(MemberController::class)->group(function() {
+    Route::get('/profile', 'show')->middleware('isMember');
+    // Route::post('/profile', 'updateProfile')->middleware('isMember');
 });

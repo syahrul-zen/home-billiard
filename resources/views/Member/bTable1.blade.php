@@ -9,6 +9,7 @@
         --card-light: rgba(255, 255, 255, 0.95);
         --border-light: rgba(10, 36, 99, 0.2);
         --booked-red: #dc3545;
+        --pending-yellow: #ffc107;
         --text-dark: #333333;
     }
 
@@ -155,7 +156,25 @@
         opacity: 0.7;
     }
 
-    .time-slot .time {
+    /* Pending State */
+    .time-slot.pending {
+        background-color: rgba(255, 193, 7, 0.1);
+        border-color: var(--pending-yellow);
+        cursor: not-allowed;
+        opacity: 0.7;
+    }
+
+    .time-slot.pending::before {
+        content: '\26A0';
+        position: absolute;
+        top: 10px;
+        right: 15px;
+        color: var(--pending-yellow);
+        font-weight: bold;
+        font-size: 1.2rem;
+    }
+
+    .time-slot.pending .time {
         font-size: 1.3rem;
         font-weight: 600;
         margin-bottom: 5px;
@@ -453,6 +472,19 @@
             <!-- Table Selection -->
             <div class="table-selection">
                 <h3><i class="bi bi-table me-2"></i>Booking Meja 2</h3>
+
+                @if (session('success'))
+                    <div class="alert alert-success" role="alert">
+                        {{ session('success') }}
+                    </div>
+                @endif
+
+                    @if (session('error'))
+                        <div class="alert alert-danger" role="alert">
+                            {{ session('error') }}
+                        </div>
+                    @endif
+
                 <div class="table-info">
                     <h4>Untuk tanggal {{ date('d-M-Y') }}</h4>
                     <p>Meja billiard premium dengan ruangan smoking yang nyaman</p>
@@ -487,14 +519,26 @@
                             data-jam="{{ date('H:i:s', strtotime($item)) }}">
                             <div class="time">{{ date('H:i', strtotime($item)) }} - {{ $satuJam }}</div>
                             <div class="duration">60 menit</div>
-                            <div class="price">Rp. 80.000</div>
+                            <div class="price">Rp. 80.000 (Availibe)</div>
                         </div>
                     @else
-                        <div class="time-slot booked" data-jam="10:00">
-                            <div class="time">13:00 - 14:00</div>
-                            <div class="duration">60 menit</div>
-                            <div class="price">Rp. 80.000</div>
-                        </div>
+
+                        @if ($data->first()->status_booking == 'pending')
+
+                            <div class="time-slot pending" data-jam="10:00">
+                                <div class="time">{{ date('H:i', strtotime($item)) }} - {{ $satuJam }}</div>
+                                <div class="duration">60 menit</div>
+                                <div class="price">Rp. 80.000 (pending)</div>
+                            </div>
+                        @else
+                            <div class="time-slot booked" data-jam="10:00">
+                                <div class="time">{{ date('H:i', strtotime($item)) }} - {{ $satuJam }}</div>
+                                <div class="duration">60 menit</div>
+                                <div class="price">Rp. 80.000(booked)</div>
+                            </div>
+                        @endif
+
+
                     @endif
                 @endforeach
 
