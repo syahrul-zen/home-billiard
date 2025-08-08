@@ -36,8 +36,8 @@
                 <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">List Meja : </h6>
-                        <a class="collapse-item" href="buttons.html">Meja 1</a>
-                        <a class="collapse-item" href="cards.html">Meja 2</a>
+                        <a class="collapse-item" href="{{ url('/table1') }}">Meja 1</a>
+                        <a class="collapse-item" href="{{ url('/table2') }}">Meja 2</a>
                     </div>
                 </div>
             </li>

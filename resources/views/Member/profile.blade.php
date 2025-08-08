@@ -566,6 +566,7 @@
                                 <th>Tanggal</th>
                                 <th>Jam</th>
                                 {{-- <th>Durasi</th> --}}
+                                <th>Meja</th>
                                 <th>Harga</th>
                                 <th>Status</th>
                                 <th>Aksi</th>
@@ -579,6 +580,26 @@
                                     <td>{{  \Carbon\Carbon::parse($history->tanggal_mulai)->translatedFormat('d F Y') }}</td>
                                     <td>{{  \Carbon\Carbon::parse($history->waktu_mulai)->translatedFormat('H:i') }} - {{  \Carbon\Carbon::parse($history->waktu_akhir)->translatedFormat('H:i') }}</td>
                                     {{-- <td>{{ $history->durasi }} jam</td> --}}
+
+                                    @if ($history->getTable() == 'table1s')
+                                        <td>{{ 'Meja 1' }}</td>
+                                        
+                                    @elseif ($history->getTable() == 'table2s')
+                                        <td>{{ 'Meja 2' }}</td>
+
+                                    @elseif ($history->getTable() == 'table3s')
+                                        <td>{{ 'Meja 3' }}</td>
+
+                                    @elseif ($history->getTable() == 'table4s')
+                                        <td>{{ 'Meja 4' }}</td> 
+
+                                    @elseif ($history->getTable() == 'table5s')
+                                        <td>{{ 'Meja 5' }}</td>     
+                                    
+                                    @elseif ($history->getTable() == 'table6s')
+                                        <td>{{ 'Meja 6' }}</td>
+                                        
+                                    @endif
                                     <td>Rp {{ number_format($history->harga, 0, ',', '.') }}</td>
                                     <td><span class="booking-status status-completed">{{ $history->status_booking }}</span></td>
                                     <td>

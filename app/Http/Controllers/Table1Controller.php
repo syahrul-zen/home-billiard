@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 
 use illuminate\Support\Facades\Auth;
 
+use Illuminate\Support\Facades\File;
 
 class Table1Controller extends Controller
 {
@@ -15,7 +16,9 @@ class Table1Controller extends Controller
      */
     public function index()
     {
-        //
+        return view('Admin.Table1.index', [
+            'bookings' => Table1::with('member')->orderBy('waktu_mulai', 'DESC')->get()
+        ]);
     }
 
     /**
@@ -69,7 +72,10 @@ class Table1Controller extends Controller
      */
     public function edit(Table1 $table1)
     {
-        //
+
+        return view('Admin.Table1.edit', [
+            'booking' => $table1
+        ]);
     }
 
     /**
@@ -85,7 +91,11 @@ class Table1Controller extends Controller
      */
     public function destroy(Table1 $table1)
     {
-        //
+        File::delete('file/' . $table1->bukti_pembayaran);
+
+        $table1->delete();
+
+        return redirect('/table1')->with('success', 'Data booking berhasil dihapus.');
     }
 
     public function showJadwal() {
@@ -129,5 +139,28 @@ class Table1Controller extends Controller
             'waktuAkhir' => $satuJamKedepan,
             'user' => $user
         ]);
+    }
+
+    public function setStatusBooking(Table1 $table1, Request $request) {
+
+        $status = $request->input('status_booked');
+
+        $table1->status_booking = $status;
+
+        $table1->save();
+
+        return redirect()->back()->with('success', 'Status booking berhasil diperbarui.');
+    }
+
+    public function setStatusPembayaran(Table1 $table1, Request $request) {
+
+        $status = $request->input('status_pembayaran');
+
+
+        $table1->status_pembayaran = $status;
+
+        $table1->save();
+
+        return redirect()->back()->with('success', 'Status pembayaran berhasil diperbarui.');
     }
 }

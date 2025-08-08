@@ -6,6 +6,9 @@ use Closure;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 
+use illuminate\Support\Facades\Auth;
+
+
 class isAdmin
 {
     /**
@@ -15,6 +18,15 @@ class isAdmin
      */
     public function handle(Request $request, Closure $next): Response
     {
+
+        if(!Auth::guard('member')->check() && !Auth::guard('admin')->check()) {
+            return redirect('/login')->with('error', 'You must be logged in to access this page.');
+        }
+
+        if (!Auth::guard('admin')->check()) {
+            return redirect('/');
+        }
+
         return $next($request);
     }
 }

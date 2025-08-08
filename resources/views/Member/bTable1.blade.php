@@ -471,7 +471,7 @@
         <div class="booking-card">
             <!-- Table Selection -->
             <div class="table-selection">
-                <h3><i class="bi bi-table me-2"></i>Booking Meja 2</h3>
+                <h3><i class="bi bi-table me-2"></i>Booking Meja 1</h3>
 
                 @if (session('success'))
                     <div class="alert alert-success" role="alert">

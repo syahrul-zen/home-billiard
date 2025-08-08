@@ -43,6 +43,15 @@ class AuthController extends Controller
     }
 
     public function login() {
+
+        if (Auth::guard('admin')->check()) {
+            return redirect('/dashboard');
+        }
+
+        if (Auth::guard('member')->check()) {
+            return redirect('/');
+        }
+
         return view('Auth.login');  
     }
 

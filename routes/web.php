@@ -69,3 +69,9 @@ Route::controller(MemberController::class)->group(function() {
     Route::get('/profile', 'show')->middleware('isMember');
     // Route::post('/profile', 'updateProfile')->middleware('isMember');
 });
+
+Route::resource('/table1', Table1Controller::class)->middleware('isAdmin');
+Route::controller(Table1Controller::class)->group(function() {
+    Route::post('/set-status-booking1/{table1}', 'setStatusBooking');
+    Route::post('/set-status-pembayaran1/{table1}', 'setStatusPembayaran');
+});

@@ -20,6 +20,8 @@
     <!-- Custom styles for this template-->
     <link href="{{ asset('FE/css/sb-admin-2.min.css') }}" rel="stylesheet">
 
+    <link rel="stylesheet" href="{{ asset('FE/vendor/datatables/dataTables.bootstrap4.min.css') }}">
+
 </head>
 
 <body id="page-top">
@@ -216,7 +218,7 @@
                             <!-- Dropdown - User Information -->
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
                                 aria-labelledby="userDropdown">
-                                <a class="dropdown-item" href="#">
+                                {{-- <a class="dropdown-item" href="#">
                                     <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
                                     Profile
                                 </a>
@@ -227,8 +229,8 @@
                                 <a class="dropdown-item" href="#">
                                     <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
                                     Activity Log
-                                </a>
-                                <div class="dropdown-divider"></div>
+                                </a> --}}
+                                {{-- <div class="dropdown-divider"></div> --}}
                                 <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
                                     <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
                                     Logout
@@ -283,7 +285,11 @@
                 <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
                 <div class="modal-footer">
                     <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                    <a class="btn btn-primary" href="login.html">Logout</a>
+
+                    <form action="{{ url('logout') }}" method="post">
+                        @csrf
+                        <button class="btn btn-primary" type="submit">Logout</button>
+                    </form>
                 </div>
             </div>
         </div>
@@ -291,6 +297,7 @@
 
     <!-- Bootstrap core JavaScript-->
     <script src="{{ asset('FE/vendor/jquery/jquery.min.js') }}"></script>
+    <script src="https://unpkg.com/@popperjs/core@2"></script>
     <script src="{{ asset('FE/vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
 
     <!-- Core plugin JavaScript-->
@@ -299,12 +306,19 @@
     <!-- Custom scripts for all pages-->
     <script src="{{ asset('FE/js/sb-admin-2.min.js') }}"></script>
 
-    <!-- Page level plugins -->
+    {{-- <!-- Page level plugins -->
     <script src="{{ asset('FE/vendor/chart.js/Chart.min.js') }}"></script>
 
     <!-- Page level custom scripts -->
     <script src="{{ asset('FE/js/demo/chart-area-demo.js') }}"></script>
-    <script src="{{ asset('FE/js/demo/chart-pie-demo.js') }}"></script>
+    <script src="{{ asset('FE/js/demo/chart-pie-demo.js') }}"></script> --}}
+
+    <script src="{{ asset('FE/vendor/datatables/jquery.dataTables.min.js') }}"></script>
+    <script src="{{ asset('FE/vendor/datatables/dataTables.bootstrap4.min.js') }}"></script>
+
+    <script src="{{ asset('FE/js/demo/datatables-demo.js') }}"></script>
+
+
 
 </body>
 

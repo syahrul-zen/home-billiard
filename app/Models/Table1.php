@@ -20,4 +20,9 @@ class Table1 extends Model
         'status_pembayaran', 
         'member_id'
     ];
+
+    public function member()
+    {
+        return $this->belongsTo(Member::class);
+    }
 }   
