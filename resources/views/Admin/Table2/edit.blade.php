@@ -283,7 +283,7 @@
     <div class="detail-container">
         <!-- Header -->
         <div class="detail-header">
-            <h4><i class="bi bi-box-arrow-up"></i> Detail Booking Meja 1</h4>
+            <h4><i class="bi bi-box-arrow-up"></i> Detail Booking Meja 2</h4>
         </div>
 
         <!-- Detail Card -->
@@ -308,7 +308,7 @@
                     <i class="bi bi-pencil-square"></i> Status Rental
                 </button> --}}
 
-                <a href="{{ url("/table1") }}" class="btn-action btn-receipt">
+                <a href="{{ url("/table2") }}" class="btn-action btn-receipt">
                     Kembali
                 </a>
                 <button type="button" class="btn-action btn-status" data-toggle="modal" data-target="#statusBooking">
@@ -333,7 +333,7 @@
                     <tr>
                         <th>Meja Billiard</th>
                         <td>:</td>
-                        <td>Meja 1</td>
+                        <td>Meja 2</td>
                     </tr>
                     <tr>
                         <th>Tanggal</th>
@@ -384,45 +384,6 @@
         </div>
     </div>
 
-    <!-- Status Rental Modal -->
-    <div class="modal fade" id="statusModal" tabindex="-1">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">Status Rental</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-                </div>
-                <form>
-                    <div class="modal-body">
-                        <p>Ubah Status Rental</p>
-                        <div class="form-check">
-                            <input class="form-check-input" type="radio" name="statusRental" id="belumDiambil" checked>
-                            <label class="form-check-label" for="belumDiambil">
-                                Belum Diambil
-                            </label>
-                        </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="radio" name="statusRental" id="sedangDipinjam">
-                            <label class="form-check-label" for="sedangDipinjam">
-                                Sedang Dipinjam
-                            </label>
-                        </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="radio" name="statusRental" id="telahDikembalikan">
-                            <label class="form-check-label" for="telahDikembalikan">
-                                Telah Dikembalikan
-                            </label>
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-primary">Simpan</button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-
     <!-- Status Booking Modal -->
     <!-- Modal -->
     <div class="modal fade" id="statusBooking" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
@@ -436,7 +397,7 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form action="{{ url("set-status-booking1/" . $booking->id) }}" method="POST">
+                    <form action="{{ url("set-status-booking2/" . $booking->id) }}" method="POST">
                         @csrf
                         <div class="form-check">
                             <input class="form-check-input" type="radio" name="status_booked" id="statusPending"
@@ -466,7 +427,7 @@
     <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
-                <form action="{{ url("set-status-pembayaran1/" . $booking->id) }}" method="post">
+                <form action="{{ url("set-status-pembayaran2/" . $booking->id) }}" method="post">
                     @csrf
                     <div class="modal-header">
                         <h5 class="modal-title" id="exampleModalLabel">Status Pembayaran</h5>

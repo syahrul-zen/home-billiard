@@ -68,8 +68,6 @@ class MemberController extends Controller
         // Sortir berdasarkan waktu mulai
         $allHistory = $allHistory->sortBy('created_at');
 
-        // return $allHistory;
-
         return view('Member.profile', [
             'member' => $member, 
             'totalBermain' => $total, 

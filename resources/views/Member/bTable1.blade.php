@@ -1,4 +1,4 @@
-@extends('Member.Layouts.main')
+@extends("Member.Layouts.main")
 <style>
     /* Main Booking Card */
     :root {
@@ -380,7 +380,6 @@
         animation: slideIn 0.3s ease;
     }
 
-
     /* Modal Styles - PERBAIKAN MODAL */
     .modal-content {
         background-color: #ffffff !important;
@@ -465,7 +464,7 @@
     }
 </style>
 
-@section('container')
+@section("container")
     <div class="booking-container container my-5">
         <!-- Main Booking Card -->
         <div class="booking-card">
@@ -473,20 +472,20 @@
             <div class="table-selection">
                 <h3><i class="bi bi-table me-2"></i>Booking Meja 1</h3>
 
-                @if (session('success'))
+                @if (session("success"))
                     <div class="alert alert-success" role="alert">
-                        {{ session('success') }}
+                        {{ session("success") }}
                     </div>
                 @endif
 
-                    @if (session('error'))
-                        <div class="alert alert-danger" role="alert">
-                            {{ session('error') }}
-                        </div>
-                    @endif
+                @if (session("error"))
+                    <div class="alert alert-danger" role="alert">
+                        {{ session("error") }}
+                    </div>
+                @endif
 
                 <div class="table-info">
-                    <h4>Untuk tanggal {{ date('d-M-Y') }}</h4>
+                    <h4>Untuk tanggal {{ date("d-M-Y") }}</h4>
                     <p>Meja billiard premium dengan ruangan smoking yang nyaman</p>
                 </div>
             </div>
@@ -497,51 +496,44 @@
                 <p id="selectedTimeText"></p>
             </div> --}}
 
-
             <!-- Time Slots -->
             <div class="time-slots">
 
                 @foreach ($jamMain as $item)
                     @php
                         $data = $dataTanggalSekarang->where(
-                            'waktu_mulai',
-                            '=',
-                            $tanggalSekarang->format('Y-m-d') . ' ' . $item,
+                            "waktu_mulai",
+                            "=",
+                            $tanggalSekarang->format("Y-m-d") . " " . $item
                         );
 
-                        $satuJam = date('H:i', strtotime('+1 hour', strtotime($item)));
+                        $satuJam = date("H:i", strtotime("+1 hour", strtotime($item)));
 
                     @endphp
 
-
                     @if ($data->isEmpty())
-                        <div class="time-slot" onclick="toggleSelection(this)" data-tanggal="{{ date('d-M-Y') }}"
-                            data-jam="{{ date('H:i:s', strtotime($item)) }}">
-                            <div class="time">{{ date('H:i', strtotime($item)) }} - {{ $satuJam }}</div>
+                        <div class="time-slot" onclick="toggleSelection(this)" data-tanggal="{{ date("d-M-Y") }}"
+                            data-jam="{{ date("H:i:s", strtotime($item)) }}">
+                            <div class="time">{{ date("H:i", strtotime($item)) }} - {{ $satuJam }}</div>
                             <div class="duration">60 menit</div>
-                            <div class="price">Rp. 80.000 (Availibe)</div>
+                            <div class="price">Rp. 35.000 (Availibe)</div>
                         </div>
                     @else
-
-                        @if ($data->first()->status_booking == 'pending')
-
+                        @if ($data->first()->status_booking == "pending")
                             <div class="time-slot pending" data-jam="10:00">
-                                <div class="time">{{ date('H:i', strtotime($item)) }} - {{ $satuJam }}</div>
+                                <div class="time">{{ date("H:i", strtotime($item)) }} - {{ $satuJam }}</div>
                                 <div class="duration">60 menit</div>
-                                <div class="price">Rp. 80.000 (pending)</div>
+                                <div class="price">Rp. 35.000 (pending)</div>
                             </div>
                         @else
                             <div class="time-slot booked" data-jam="10:00">
-                                <div class="time">{{ date('H:i', strtotime($item)) }} - {{ $satuJam }}</div>
+                                <div class="time">{{ date("H:i", strtotime($item)) }} - {{ $satuJam }}</div>
                                 <div class="duration">60 menit</div>
-                                <div class="price">Rp. 80.000(booked)</div>
+                                <div class="price">Rp. 35.000(booked)</div>
                             </div>
                         @endif
-
-
                     @endif
                 @endforeach
-
 
                 {{-- <div class="time-slot" onclick="toggleSelection(this)" data-tanggal="{{ date('Y-m-d') }}" data-jam="10:00" data-akunId="{{ "bambang" }}">
                     <div class="time">13:00 - 14:00</div>
@@ -601,7 +593,6 @@
             </div> --}}
             </div>
 
-
             <!-- Action Buttons -->
             <div class="booking-actions">
                 <button class="btn-booking btn-detail" onclick="showDetails()">
@@ -656,7 +647,7 @@
         </div>
     </div>
 
-    <script src="{{ asset('FE/js/sweetalert.min.js') }}"></script>
+    <script src="{{ asset("FE/js/sweetalert.min.js") }}"></script>
 
     <script>
         function showDetails() {

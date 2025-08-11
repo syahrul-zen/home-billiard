@@ -93,7 +93,7 @@ class Table1Controller extends Controller
     {
         File::delete('file/' . $table1->bukti_pembayaran);
 
-        $table1->delete();
+         $table1->delete();
 
         return redirect('/table1')->with('success', 'Data booking berhasil dihapus.');
     }

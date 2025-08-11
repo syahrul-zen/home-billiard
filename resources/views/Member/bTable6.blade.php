@@ -470,7 +470,7 @@
         <div class="booking-card">
             <!-- Table Selection -->
             <div class="table-selection">
-                <h3><i class="bi bi-table me-2"></i>Booking Meja 2</h3>
+                <h3><i class="bi bi-table me-2"></i>Booking Meja 6</h3>
 
                 @if (session("success"))
                     <div class="alert alert-success" role="alert">
@@ -534,6 +534,7 @@
                         @endif
                     @endif
                 @endforeach
+
             </div>
 
             <!-- Action Buttons -->
@@ -541,6 +542,9 @@
                 <button class="btn-booking btn-detail" onclick="showDetails()">
                     <i class="bi bi-info-circle me-2"></i>Detail Booking
                 </button>
+                {{-- <button class="btn-booking btn-create" onclick="confirmBooking()" id="createBtn" disabled>
+                    <i class="bi bi-plus-circle me-2"></i>Create Booking
+                </button> --}}
             </div>
         </div>
     </div>
@@ -581,7 +585,7 @@
                     </div>
                 </div>
                 <div class="modal-footer border-top border-secondary">
-                    <button type="button" class="btn btn-secondary btn" data-bs-dismiss="modal">Tutup</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
                 </div>
             </div>
         </div>
@@ -609,10 +613,9 @@
                 })
                 .then((willDelete) => {
                     if (willDelete) {
-                        window.location.href = `pembayaran-table2/${tanggal}/${jam}`;
+                        window.location.href = `pembayaran-table6/${tanggal}/${jam}`;
                     }
                 });
-
         }
     </script>
 @endsection

@@ -11,7 +11,7 @@
         @endif
         <div class="card mb-4 shadow">
             <div class="card-header py-3">
-                <h6 class="font-weight-bold text-primary m-0">Booking Meja 1</h6>
+                <h6 class="font-weight-bold text-primary m-0">Booking Meja 4</h6>
             </div>
             <div class="card-body">
                 <div class="table-responsive">
@@ -43,12 +43,12 @@
                                     </td>
                                     <td>{{ $data->keterangan }}</td>
                                     <td>
-                                        <a href="{{ url("table1/" . $data->id . "/edit") }}" class="btn btn-warning"><i
-                                                class="fas fa-pencil-alt"></i></a>
-                                        <form action="{{ url("table1/" . $data->id) }}" method="POST" class="d-inline">
+                                        <a href="{{ url("table4/" . $data->id . "/edit") }}"
+                                            class="btn btn-sm btn-warning"><i class="fas fa-pencil-alt"></i></a>
+                                        <form action="{{ url("table4/" . $data->id) }}" method="POST" class="d-inline">
                                             @csrf
                                             @method("DELETE")
-                                            <button type="submit" class="btn btn-danger"
+                                            <button type="submit" class="btn btn-sm btn-danger"
                                                 onclick="return confirm('Apakah Anda yakin ingin menghapus data ini?')"><i
                                                     class="fas fa-trash-alt"></i></button>
                                         </form>

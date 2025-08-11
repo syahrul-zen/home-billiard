@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 
 use illuminate\Support\Facades\Auth;
 
+use Illuminate\Support\Facades\File;
+
 
 class Table2Controller extends Controller
 {
@@ -15,7 +17,9 @@ class Table2Controller extends Controller
      */
     public function index()
     {
-        //
+        return view("Admin.Table2.index", [
+            "bookings" => Table2::with('member')->orderBy('waktu_mulai', 'DESC')->get()
+        ]);
     }
 
     /**
@@ -31,7 +35,7 @@ class Table2Controller extends Controller
      */
     public function store(Request $request)
     {
-         $validated = $request->validate([
+        $validated = $request->validate([
             'member_id' => 'required', 
             'waktu_mulai' => 'required', 
             'waktu_akhir' => 'required', 
@@ -69,7 +73,9 @@ class Table2Controller extends Controller
      */
     public function edit(Table2 $table2)
     {
-        //
+        return view('Admin.Table2.edit', [
+            'booking' => $table2
+        ]);
     }
 
     /**
@@ -85,7 +91,11 @@ class Table2Controller extends Controller
      */
     public function destroy(Table2 $table2)
     {
-        //
+
+        File::delete('file/' . $table2->bukti_pembayaran);
+        $table2->delete();
+
+        return redirect('/table2')->with('success', 'Data booking berhasil dihapus.');
     }
 
     public function showJadwal() {
@@ -126,4 +136,28 @@ class Table2Controller extends Controller
             'user' => $user
         ]);
     }
+
+    public function setStatusBooking(Table2 $table2, Request $request) {
+
+        $status = $request->input('status_booked');
+
+        $table2->status_booking = $status;
+
+        $table2->save();
+
+        return redirect()->back()->with('success', 'Status booking berhasil diperbarui.');
+    }
+
+    public function setStatusPembayaran(Table2 $table2, Request $request) {
+
+        $status = $request->input('status_pembayaran');
+
+
+        $table2->status_pembayaran = $status;
+
+        $table2->save();
+
+        return redirect()->back()->with('success', 'Status pembayaran berhasil diperbarui.');
+    }
+    
 }

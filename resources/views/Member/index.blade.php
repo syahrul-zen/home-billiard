@@ -68,7 +68,7 @@
                         <div class="p-4">
                             <h4>Meja Standar</h4>
                             <p>Meja billiard ukuran 7 feet dengan kualitas baik untuk pemula dan pemain kasual</p>
-                            <a href="{{ url('booking-table1') }}"><span class="price-tag">Rp 50.000/jam</span></a>
+                            <a href="{{ url('booking-table1') }}"><span class="price-tag">Rp 35.000/jam</span></a>
                         </div>
                     </div>
                 </div>
@@ -78,7 +78,7 @@
                         <div class="p-4">
                             <h4>Meja Premium</h4>
                             <p>Meja billiard ukuran 8 feet dengan permukaan mahoni untuk pemain intermediate</p>
-                            <a href="{{ url('booking-table2') }}"><span class="price-tag">Rp 50.000/jam</span></a>
+                            <a href="{{ url('booking-table2') }}"><span class="price-tag">Rp 35.000/jam</span></a>
                         </div>
                     </div>
                 </div>
@@ -88,7 +88,7 @@
                         <div class="p-4">
                             <h4>Meja VIP</h4>
                             <p>Meja billiard ukuran 9 feet standar turnamen dengan fasilitas lengkap</p>
-                            <span class="price-tag">Rp 100.000/jam</span>
+                            <a href="{{ url('booking-table3') }}"><span class="price-tag">Rp 35.000/jam</span></a>
                         </div>
                     </div>
                 </div>
@@ -98,7 +98,7 @@
                         <div class="p-4">
                             <h4>Meja Standar</h4>
                             <p>Meja billiard ukuran 7 feet dengan kualitas baik untuk pemula dan pemain kasual</p>
-                            <span class="price-tag">Rp 50.000/jam</span>
+                            <a href="{{ url('booking-table4') }}"><span class="price-tag">Rp 35.000/jam</span></a>
                         </div>
                     </div>
                 </div>
@@ -108,7 +108,7 @@
                         <div class="p-4">
                             <h4>Meja Premium</h4>
                             <p>Meja billiard ukuran 8 feet dengan permukaan mahoni untuk pemain intermediate</p>
-                            <span class="price-tag">Rp 75.000/jam</span>
+                            <a href="{{ url('booking-table5') }}"><span class="price-tag">Rp 35.000/jam</span></a>
                         </div>
                     </div>
                 </div>
@@ -118,7 +118,7 @@
                         <div class="p-4">
                             <h4>Meja VIP</h4>
                             <p>Meja billiard ukuran 9 feet standar turnamen dengan fasilitas lengkap</p>
-                            <span class="price-tag">Rp 100.000/jam</span>
+                            <a href="{{ url('booking-table6') }}"><span class="price-tag">Rp 35.000/jam</span></a>
                         </div>
                     </div>
                 </div>

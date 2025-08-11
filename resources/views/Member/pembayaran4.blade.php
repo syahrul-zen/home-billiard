@@ -38,7 +38,7 @@
 
     <div class="container py-4">
 
-        <form action="{{ url("/booking-table2") }}" method="post" enctype="multipart/form-data">
+        <form action="{{ url("/booking-table4") }}" method="post" enctype="multipart/form-data">
 
             <input type="hidden" name="member_id" value="{{ $user->id }}">
             <input type="hidden" name="waktu_mulai" value="{{ $waktuAwal }}">
@@ -93,10 +93,11 @@
 
             <div class="section-card">
                 <div class="mb-2">
-                    <h5 class="fw-bold mb-0">Meja 2</h5>
+                    <h5 class="fw-bold mb-0">Meja 4</h5>
                     {{-- <p class="text-success fw-bold mb-1">Futsal Ball</p> --}}
                     <br>
-                    <p class="text-success fw-bold mb-3">Wed, 06 Aug 2025 • {{ date("H:i", strtotime($waktuAwal)) }} -
+                    <p class="text-success fw-bold mb-3">{{ date("D, d M Y", strtotime($tanggal)) }} •
+                        {{ date("H:i", strtotime($waktuAwal)) }} -
                         {{ date("H:i", strtotime($waktuAkhir)) }}</p>
                 </div>
                 <hr>
