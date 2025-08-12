@@ -12,6 +12,7 @@ use App\Http\Controllers\AdminController;
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use Codedge\Fpdf\Fpdf\Fpdf;
 
 /*
 |--------------------------------------------------------------------------
@@ -157,6 +158,8 @@ Route::controller(Table6Controller::class)->group(function() {
 // CRUD Member Admin :
 Route::resource('/member', MemberController::class)->middleware('isAdmin');
 
+Route::post('/cetak-pdf', [Table1Controller::class, 'cetakPdf'])->middleware('isAdmin');
+
 // ======================================================================================
 
 Route::get('/edit-admin', [AdminController::class, 'index']);
@@ -173,5 +176,65 @@ Route::get('/test2', function() {
 Route::controller(MemberController::class)->group(function() {
     Route::get('/profile', 'show')->middleware('isMember');
     // Route::post('/profile', 'updateProfile')->middleware('isMember');
+});
+
+Route::get('/pdf', function (Codedge\Fpdf\Fpdf\Fpdf $fpdf) {
+
+    $pdf = new FPDF('P', 'mm', 'A4');
+        $pdf->AddPage();
+
+        // Set font
+        $pdf->SetFont('Arial', 'B', 12);
+
+        // Header
+        $pdf->Cell(0, 5, 'LAPANGAN FUTSAL GOLDEN', 0, 1, 'C');
+        $pdf->Cell(0, 5, 'JAMBI', 0, 1, 'C');
+
+        $pdf->SetFont('Arial', '', 9);
+        $pdf->Cell(0, 5, 'Kenali Besar, Kec. Kota Baru, Kota Jambi, Jambi 36361', 0, 1, 'C');
+        $pdf->Line(10, $pdf->GetY() + 2, 200, $pdf->GetY() + 2);
+        $pdf->Ln(5);
+        // Header tabel
+        $pdf->Cell(10, 10, 'No', 1);
+        $pdf->Cell(30, 10, 'Nama Customer', 1);
+        $pdf->Cell(25, 10, 'Nomor WA', 1);
+        $pdf->Cell(25, 10, 'Waktu Mulai', 1);
+        $pdf->Cell(25, 10, 'Waktu Akhir', 1);
+        $pdf->Cell(25, 10, 'Status', 1);
+        $pdf->Cell(25, 10, 'Tipe Lapangan', 1);
+        $pdf->Cell(25, 10, 'Harga', 1);
+        $pdf->Ln();
+
+        // Data tabel
+        $pdf->SetFont('Arial', '', 7);
+
+        // Contoh data
+        // $data = [
+        //     ['id' => 1, 'nama_customer' => 'cahyo pujo suwoko', 'email' => 'cahyops@gmail.com', 'nomor_wa' => '08123456789', 'waktu_mulai' => '12-12-2024', 'waktu_akhir' => '12-12-2024', 'status' => '12-12-2024', 'tipe_lapangan' => 'sahrul', 'harga' => '100,000'],
+        // ];
+
+
+        // Loop melalui data dan tambahkan ke tabel
+        // foreach ($data as $index => $row) {
+        //     $nama = $row->member->nama_lengkap;
+        //     $no_wa = $row->member->no_wa;
+        //     $tanggalAwal = date('d-m-Y H:i', strtotime($row['waktu_mulai']));
+        //     $tanggalAkhir = date('d-m-Y H:i', strtotime($row['waktu_akhir']));
+        //     $no = $index + 1;
+        //     $pdf->Cell(10, 10, $no, 1);
+        //     $pdf->Cell(30, 10, $nama, 1);
+        //     $pdf->Cell(25, 10, $no_wa, 1);
+        //     $pdf->Cell(25, 10, $tanggalAwal, 1);
+        //     $pdf->Cell(25, 10, $tanggalAkhir, 1);
+        //     $pdf->Cell(25, 10, $row['status_booking'], 1);
+        //     $pdf->Cell(25, 10, "Lapangan Matras", 1);
+        //     $pdf->Cell(25, 10, $row['harga'], 1);
+        //     $pdf->Ln();
+        // }
+
+        $pdf->Output();
+        exit;
+        // Output PDF
+
 });
 
