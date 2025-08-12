@@ -3,11 +3,18 @@
 namespace App\Http\Controllers;
 
 use App\Models\Table1;
+use App\Models\Table2;
+use App\Models\Table3;
+use App\Models\Table4;
+use App\Models\Table5;
+use App\Models\Table6;
 use Illuminate\Http\Request;
 
 use illuminate\Support\Facades\Auth;
 
 use Illuminate\Support\Facades\File;
+
+use Codedge\Fpdf\Fpdf\Fpdf;
 
 class Table1Controller extends Controller
 {
@@ -165,6 +172,136 @@ class Table1Controller extends Controller
     }
 
     public function cetakPdf(Request $request) {
-        return $request;
+
+        // $data = Table1::with('member')->whereBetween('')
+
+        // $data = Table1::with(['member', function($query) {
+        //     $query->select('id','nama_lengkap');
+        // }])
+        // ->get([
+        //     'id',
+        //     'waktu_mulai', 
+        //     'waktu_akhir', 
+        //     'harga', 
+        //     'status_pembayaran',
+        //     'member_id' 
+        // ]);
+
+        $data1 = Table1::select('waktu_mulai', 
+            'waktu_akhir', 
+            'harga', 
+            'member_id',
+            'status_pembayaran')->whereBetween('waktu_mulai', [$request->tanggal_awal, $request->tanggal_akhir])->with(['member:id,nama_lengkap,no_wa'])->get();
+
+        $data2 = Table2::select('waktu_mulai', 
+            'waktu_akhir', 
+            'harga', 
+            'member_id',
+            'status_pembayaran')->whereBetween('waktu_mulai', [$request->tanggal_awal, $request->tanggal_akhir])->with(['member:id,nama_lengkap,no_wa'])->get();
+
+
+        $data3 = Table3::select('waktu_mulai', 
+            'waktu_akhir', 
+            'harga', 
+            'member_id',
+            'status_pembayaran')->whereBetween('waktu_mulai', [$request->tanggal_awal, $request->tanggal_akhir])->with(['member:id,nama_lengkap,no_wa'])->get();
+
+        $data4 = Table4::select('waktu_mulai', 
+            'waktu_akhir', 
+            'harga', 
+            'member_id',
+            'status_pembayaran')->whereBetween('waktu_mulai', [$request->tanggal_awal, $request->tanggal_akhir])->with(['member:id,nama_lengkap,no_wa'])->get();
+        
+        $data5 = Table5::select('waktu_mulai', 
+            'waktu_akhir', 
+            'harga', 
+            'member_id',
+            'status_pembayaran')->whereBetween('waktu_mulai', [$request->tanggal_awal, $request->tanggal_akhir])->with(['member:id,nama_lengkap,no_wa'])->get();
+        
+        $data6 = Table6::select('waktu_mulai', 
+            'waktu_akhir', 
+            'harga', 
+            'member_id',
+            'status_pembayaran')->whereBetween('waktu_mulai', [$request->tanggal_awal, $request->tanggal_akhir])->with(['member:id,nama_lengkap,no_wa'])->get();
+
+        $mergeData = $data1->concat($data2)
+                    ->concat($data3)
+                    ->concat($data4)
+                    ->concat($data5)
+                    ->concat($data6);
+        
+
+        $pdf = new FPDF('P', 'mm', 'A4');
+        $pdf->AddPage();
+
+        // Set font
+        $pdf->SetFont('Arial', 'B', 12);
+
+        // Header
+        $pdf->Cell(0, 5, 'LAPANGAN FUTSAL GOLDEN', 0, 1, 'C');
+        $pdf->Cell(0, 5, 'JAMBI', 0, 1, 'C');
+
+        
+        $pdf->SetFont('Arial', '', 9);
+        $pdf->Cell(0, 5, 'Kenali Besar, Kec. Kota Baru, Kota Jambi, Jambi 36361', 0, 1, 'C');
+        $pdf->Cell(0, 5, 'Periode ' . date('d-m-Y', strtotime($request->tanggal_awal)) . ' - ' . date('d-m-Y', strtotime($request->tanggal_akhir)), 0, 1, 'C');
+       
+        $pdf->Line(10, $pdf->GetY() + 2, 200, $pdf->GetY() + 2);
+        $pdf->Ln(5);
+        // Header tabel
+        $pdf->Cell(10, 10, 'No', 1);
+        $pdf->Cell(30, 10, 'Nama Customer', 1);
+        $pdf->Cell(20, 10, 'Meja', 1);
+        $pdf->Cell(25, 10, 'Waktu Mulai', 1);
+        $pdf->Cell(25, 10, 'Waktu Akhir', 1);
+        $pdf->Cell(25, 10, 'Nomor WA', 1);
+        $pdf->Cell(30, 10, 'Status Bayar', 1);
+        $pdf->Cell(25, 10, 'Harga', 1);
+        $pdf->Ln();
+
+        // Data tabel
+        $pdf->SetFont('Arial', '', 7);
+
+        foreach($mergeData as $index => $row) {
+            $no = $index + 1;
+            $nama = $row->member->nama_lengkap;
+            $meja = '';
+
+            if ($row->getTable() === 'table1s') {
+                $meja = 'Meja 1';
+            } else if ($row->getTable() === 'table2s') {
+                $meja = 'Meja 2';
+            } else if ($row->getTable() === 'table3s') { 
+                $meja = 'Meja 3';
+            } else if ($row->getTable() === 'table4s') { 
+                $meja = 'Meja 4';
+            } else if ($row->getTable() === 'table5s') { 
+                $meja = 'Meja 5';
+            } else if ($row->getTable() === 'table6s') { 
+                $meja = 'Meja 6';
+            }
+
+            // $waktu_mulai = date('d-m-Y (H:i)', );
+            $waktu_mulai = date('d-m-Y (H:i)', strtotime($row->waktu_mulai));
+            $waktu_akhir = date('d-m-Y (H:i)', strtotime($row->waktu_akhir));
+            // $waktu_akhir = $row->waktu_akhir;
+            $no_wa = $row->member->no_wa;
+            $status_bayar = $row->status_pembayaran;
+            $harga = 35000;
+
+            $pdf->cell(10, 10, $no, 1);
+            $pdf->cell(30, 10, $nama, 1);
+            $pdf->cell(20, 10, $meja, 1);
+            $pdf->cell(25, 10, $waktu_mulai, 1);
+            $pdf->cell(25, 10, $waktu_akhir, 1);
+            $pdf->cell(25, 10, $no_wa, 1);
+            $pdf->cell(30, 10, $status_bayar, 1);
+            $pdf->cell(25, 10, $harga, 1);
+            $pdf->Ln();
+        }
+
+        $pdf->Output();
+        exit;
+                
     }
 }

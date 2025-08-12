@@ -1,4 +1,4 @@
-@extends("Member.Layouts.main")
+@extends('Member.Layouts.main')
 
 <style>
     :root {
@@ -16,7 +16,7 @@
         color: var(--text-dark);
         font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         min-height: 100vh;
-        padding: 40px 0;
+        /* padding: 40px 0; */
     }
 
     /* Profile Container */
@@ -457,7 +457,7 @@
     }
 </style>
 
-@section("container")
+@section('container')
     <div class="profile-container py-5">
         <!-- Header -->
         {{-- <div class="profile-header">
@@ -470,7 +470,7 @@
             <!-- Profile Info -->
             <div class="profile-info">
                 <div class="profile-avatar">
-                    <img src="{{ asset("file/" . $member->foto) }}" alt="Avatar" class="avatar-img">
+                    <img src="{{ asset('file/' . $member->foto) }}" alt="Avatar" class="avatar-img">
                     {{-- <img src="{{ asset('FE/img/avatar.png') }}" alt="Avatar" class="avatar-img"> --}}
                     <div class="avatar-status"></div>
                 </div>
@@ -489,7 +489,7 @@
                             <div class="stat-label">Jam Bermain</div>
                         </div> --}}
                         <div class="stat-item">
-                            <div class="stat-value">{{ "Rp " . number_format($totalBermain * 35000, 0, ",", ".") }}</div>
+                            <div class="stat-value">{{ 'Rp ' . number_format($totalBermain * 35000, 0, ',', '.') }}</div>
                             <div class="stat-label">Total Pembayaran</div>
                         </div>
                         {{-- <div class="stat-item">
@@ -546,7 +546,7 @@
                 </div>
                 <div class="info-row">
                     <div class="info-label">Tanggal Bergabung</div>
-                    <div class="info-value">{{ \Carbon\Carbon::parse($member->created_at)->translatedFormat("d F Y") }}
+                    <div class="info-value">{{ \Carbon\Carbon::parse($member->created_at)->translatedFormat('d F Y') }}
                     </div>
                 </div>
                 {{-- <div class="info-row">
@@ -579,30 +579,30 @@
                                 <tr>
                                     {{-- <td class="booking-code">#BK001</td> --}}
                                     <td>{{ $loop->iteration }}</td>
-                                    <td>{{ \Carbon\Carbon::parse($history->waktu_mulai)->translatedFormat("d F Y") }}</td>
-                                    <td>{{ \Carbon\Carbon::parse($history->waktu_mulai)->translatedFormat("H:i") }} -
-                                        {{ \Carbon\Carbon::parse($history->waktu_akhir)->translatedFormat("H:i") }}</td>
+                                    <td>{{ \Carbon\Carbon::parse($history->waktu_mulai)->translatedFormat('d F Y') }}</td>
+                                    <td>{{ \Carbon\Carbon::parse($history->waktu_mulai)->translatedFormat('H:i') }} -
+                                        {{ \Carbon\Carbon::parse($history->waktu_akhir)->translatedFormat('H:i') }}</td>
                                     {{-- <td>{{ $history->durasi }} jam</td> --}}
 
-                                    @if ($history->getTable() == "table1s")
-                                        <td>{{ "Meja 1" }}</td>
-                                    @elseif ($history->getTable() == "table2s")
-                                        <td>{{ "Meja 2" }}</td>
-                                    @elseif ($history->getTable() == "table3s")
-                                        <td>{{ "Meja 3" }}</td>
-                                    @elseif ($history->getTable() == "table4s")
-                                        <td>{{ "Meja 4" }}</td>
-                                    @elseif ($history->getTable() == "table5s")
-                                        <td>{{ "Meja 5" }}</td>
-                                    @elseif ($history->getTable() == "table6s")
-                                        <td>{{ "Meja 6" }}</td>
+                                    @if ($history->getTable() == 'table1s')
+                                        <td>{{ 'Meja 1' }}</td>
+                                    @elseif ($history->getTable() == 'table2s')
+                                        <td>{{ 'Meja 2' }}</td>
+                                    @elseif ($history->getTable() == 'table3s')
+                                        <td>{{ 'Meja 3' }}</td>
+                                    @elseif ($history->getTable() == 'table4s')
+                                        <td>{{ 'Meja 4' }}</td>
+                                    @elseif ($history->getTable() == 'table5s')
+                                        <td>{{ 'Meja 5' }}</td>
+                                    @elseif ($history->getTable() == 'table6s')
+                                        <td>{{ 'Meja 6' }}</td>
                                     @endif
-                                    <td>Rp {{ number_format($history->harga, 0, ",", ".") }}</td>
+                                    <td>Rp {{ number_format($history->harga, 0, ',', '.') }}</td>
                                     <td><span class="booking-status status-completed">{{ $history->status_booking }}</span>
                                     </td>
                                     <td>
                                         <div class="booking-actions">
-                                            <a href="{{ asset("file/" . $history->bukti_pembayaran) }}"
+                                            <a href="{{ asset('file/' . $history->bukti_pembayaran) }}"
                                                 class="btn-action btn-view">
                                                 <i class="bi bi-eye"></i> Pembayaran
                                             </a>

@@ -26,6 +26,11 @@ use Codedge\Fpdf\Fpdf\Fpdf;
 */
 
 Route::get('/', function () {
+
+    if (Auth::guard('admin')->check()) {
+        return redirect('/dashboard');
+    }
+
     return view('Member.index');
 });
 
@@ -180,7 +185,7 @@ Route::controller(MemberController::class)->group(function() {
 
 Route::get('/pdf', function (Codedge\Fpdf\Fpdf\Fpdf $fpdf) {
 
-    $pdf = new FPDF('P', 'mm', 'A4');
+        $pdf = new FPDF('P', 'mm', 'A4');
         $pdf->AddPage();
 
         // Set font
