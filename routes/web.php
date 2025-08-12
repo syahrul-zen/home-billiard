@@ -8,6 +8,7 @@ use App\Http\Controllers\Table4Controller;
 use App\Http\Controllers\Table5Controller;
 use App\Http\Controllers\Table6Controller;
 use App\Http\Controllers\MemberController;
+use App\Http\Controllers\AdminController;
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -153,6 +154,13 @@ Route::controller(Table6Controller::class)->group(function() {
 
 // ======================================================================================
 
+// CRUD Member Admin :
+Route::resource('/member', MemberController::class)->middleware('isAdmin');
+
+// ======================================================================================
+
+Route::get('/edit-admin', [AdminController::class, 'index']);
+Route::post('/edit-admin/{admin}', [AdminController::class, 'update']);
 
 Route::get('/test1', function() {
     return Auth::guard('member')->user();
