@@ -1,6 +1,6 @@
-@extends('Admin.Layouts.main')
+@extends("Admin.Layouts.main")
 
-@section('container')
+@section("container")
     <div class="container-fluid">
 
         <!-- Page Heading -->
@@ -24,8 +24,8 @@
                         <div class="row no-gutters align-items-center">
                             <div class="col mr-2">
                                 <div class="font-weight-bold text-primary text-uppercase mb-1 text-xs">
-                                    Earnings (Monthly)</div>
-                                <div class="h5 font-weight-bold mb-0 text-gray-800">$40,000</div>
+                                    Jumlah Booking Hari Ini</div>
+                                <div class="h5 font-weight-bold mb-0 text-gray-800">{{ $bookings->count() }}</div>
                             </div>
                             <div class="col-auto">
                                 <i class="fas fa-calendar fa-2x text-gray-300"></i>
@@ -42,8 +42,9 @@
                         <div class="row no-gutters align-items-center">
                             <div class="col mr-2">
                                 <div class="font-weight-bold text-success text-uppercase mb-1 text-xs">
-                                    Earnings (Annual)</div>
-                                <div class="h5 font-weight-bold mb-0 text-gray-800">$215,000</div>
+                                    Pendapatan Hari Ini</div>
+                                <div class="h5 font-weight-bold mb-0 text-gray-800">Rp
+                                    {{ number_format($bookings->sum("harga"), 0, ",", ".") }}</div>
                             </div>
                             <div class="col-auto">
                                 <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
@@ -59,17 +60,11 @@
                     <div class="card-body">
                         <div class="row no-gutters align-items-center">
                             <div class="col mr-2">
-                                <div class="font-weight-bold text-info text-uppercase mb-1 text-xs">Tasks
+                                <div class="font-weight-bold text-info text-uppercase mb-1 text-xs">Total member
                                 </div>
                                 <div class="row no-gutters align-items-center">
                                     <div class="col-auto">
-                                        <div class="h5 font-weight-bold mb-0 mr-3 text-gray-800">50%</div>
-                                    </div>
-                                    <div class="col">
-                                        <div class="progress progress-sm mr-2">
-                                            <div class="progress-bar bg-info" role="progressbar" style="width: 50%"
-                                                aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
-                                        </div>
+                                        <div class="h5 font-weight-bold mb-0 mr-3 text-gray-800">{{ $totalMember }}</div>
                                     </div>
                                 </div>
                             </div>
@@ -89,16 +84,58 @@
                             <div class="col mr-2">
                                 <div class="font-weight-bold text-warning text-uppercase mb-1 text-xs">
                                     Pending Requests</div>
-                                <div class="h5 font-weight-bold mb-0 text-gray-800">18</div>
+                                <div class="h5 font-weight-bold mb-0 text-gray-800">{{ $pendingBooking }}</div>
                             </div>
                             <div class="col-auto">
-                                <i class="fas fa-comments fa-2x text-gray-300"></i>
+                                <i class="fas fa-business-time fa-2x text-gray-300"></i>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+
+        <div class="card mb-4 shadow">
+            <div class="card-header py-3">
+                <h6 class="font-weight-bold text-primary m-0">List Booking Hari Ini</h6>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table-bordered table" id="dataTable" width="100%" cellspacing="0">
+                        <thead>
+                            <tr>
+                                <th>No</th>
+                                <th>Nama</th>
+                                <th>Waktu Mulai</th>
+                                <th>Waktu Selesai</th>
+                                <th>Status Pembayaran</th>
+                                <th>Status Booking</th>
+                                <th>Meja</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach ($bookings as $data)
+                                <tr>
+                                    <td>{{ $loop->iteration }}</td>
+                                    <td>{{ $data->member->nama_lengkap }}</td>
+                                    <td>{{ date("d-M-Y (H:i)", strtotime($data->waktu_mulai)) }}</td>
+                                    <td>{{ date("d-M-Y (H:i)", strtotime($data->waktu_akhir)) }}</td>
+                                    <td><span
+                                            class="badge {{ $data->status_pembayaran == "belum_dikonfirmasi" ? "bg-warning" : "bg-success" }} text-dark">{{ $data->status_pembayaran }}</span>
+                                    </td>
+                                    <td><span
+                                            class="badge {{ $data->status_booking == "pending" ? "bg-warning" : "bg-success" }} text-dark">{{ $data->status_booking }}</span>
+                                    </td>
+                                    <td>{{ $data->getTable() == "table1s" ? "Meja 1" : ($data->getTable() == "table2s" ? "Meja 2" : ($data->getTable() == "table3s" ? "Meja 3" : ($data->getTable() == "table4s" ? "Meja 4" : ($data->getTable() == "table5s" ? "Meja 5" : "Meja 6")))) }}
+                                    </td>
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
     </div>
 
     <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -110,7 +147,7 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <form action="{{ url('cetak-pdf') }}" method="post">
+                <form action="{{ url("cetak-pdf") }}" method="post">
                     @csrf
                     <div class="modal-body">
                         <div class="row">

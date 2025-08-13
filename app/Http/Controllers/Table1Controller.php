@@ -8,6 +8,7 @@ use App\Models\Table3;
 use App\Models\Table4;
 use App\Models\Table5;
 use App\Models\Table6;
+use App\Models\Member;
 use Illuminate\Http\Request;
 
 use illuminate\Support\Facades\Auth;
@@ -238,8 +239,8 @@ class Table1Controller extends Controller
         $pdf->SetFont('Arial', 'B', 12);
 
         // Header
-        $pdf->Cell(0, 5, 'LAPANGAN FUTSAL GOLDEN', 0, 1, 'C');
-        $pdf->Cell(0, 5, 'JAMBI', 0, 1, 'C');
+        $pdf->Cell(0, 5, 'HOME BILLIARD', 0, 1, 'C');
+        $pdf->Cell(0, 5, 'Muaro Jambi', 0, 1, 'C');
 
         
         $pdf->SetFont('Arial', '', 9);
@@ -303,5 +304,57 @@ class Table1Controller extends Controller
         $pdf->Output();
         exit;
                 
+    }
+
+    public function dashboard() {
+        $data1 = Table1::select('waktu_mulai', 
+            'waktu_akhir', 
+            'harga', 
+            'member_id',
+            'status_pembayaran', 'status_booking')->whereDate('waktu_mulai', date('Y-m-d'))->with(['member:id,nama_lengkap,no_wa'])->get();
+
+        $data2 = Table2::select('waktu_mulai', 
+            'waktu_akhir', 
+            'harga', 
+            'member_id',
+            'status_pembayaran', 'status_booking')->whereDate('waktu_mulai', date('Y-m-d'))->with(['member:id,nama_lengkap,no_wa'])->get();
+
+
+        $data3 = Table3::select('waktu_mulai', 
+            'waktu_akhir', 
+            'harga', 
+            'member_id',
+            'status_pembayaran', 'status_booking')->whereDate('waktu_mulai', date('Y-m-d'))->with(['member:id,nama_lengkap,no_wa'])->get();
+
+        $data4 = Table4::select('waktu_mulai', 
+            'waktu_akhir', 
+            'harga', 
+            'member_id',
+            'status_pembayaran', 'status_booking')->whereDate('waktu_mulai', date('Y-m-d'))->with(['member:id,nama_lengkap,no_wa'])->get();
+
+        $data5 = Table5::select('waktu_mulai', 
+            'waktu_akhir', 
+            'harga', 
+            'member_id',
+            'status_pembayaran', 'status_booking')->whereDate('waktu_mulai', date('Y-m-d'))->with(['member:id,nama_lengkap,no_wa'])->get();
+        
+        $data6 = Table6::select('waktu_mulai', 
+            'waktu_akhir', 
+            'harga', 
+            'member_id',
+            'status_pembayaran', 'status_booking')->whereDate('waktu_mulai', date('Y-m-d'))->with(['member:id,nama_lengkap,no_wa'])->get();
+
+        $mergeData = $data1->concat($data2)
+                    ->concat($data3)
+                    ->concat($data4)
+                    ->concat($data5)
+                    ->concat($data6);
+
+        return view('Admin.dashboard', [
+            'bookings' => $mergeData,
+            'totalMember' => Member::count(),
+            'pendingBooking' => $mergeData->where('status_booking', 'pending')->count()
+        ]);
+        
     }
 }
